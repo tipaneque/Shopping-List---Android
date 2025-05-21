@@ -62,17 +62,18 @@ class MainActivity : Activity() {
             val item = adapter.getItem(position) ?: return@setOnItemLongClickListener true
 
             AlertDialog.Builder(this).apply {
-                setTitle("Confirmation")
+                setTitle("Confirmação")
                 setMessage("Tem certeza que deseja apagar este item?")
-                setPositiveButton("Yes") { _, _ ->
-                    // 1) deleta do banco
+                setPositiveButton("Sim") { _, _ ->
+                    // 1) Delete the item from the database
                     val deleted = ProductDatabaseHelper(this@MainActivity)
                         .deleteProductById(item.id)
 
                     if (deleted) {
-                        // 2) atualiza lista em memória e tela
+                        // 2) Update list in memory and screen
                         adapter.remove(item)
                         globalProduct.remove(item)
+                        updateTotalValue()
                         Toast.makeText(
                             this@MainActivity,
                             "Item ${item.name} apagado!",
@@ -86,10 +87,10 @@ class MainActivity : Activity() {
                         ).show()
                     }
 
-                    // 3) recarrega a lista (ou apenas adapter.notifyDataSetChanged())
+                    // 3) Reload the list (or just adapter.notifyDataSetChanged())
                     updateProductList()
                 }
-                setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                setNegativeButton("Não") { dialog, _ -> dialog.dismiss() }
                 show()
             }
 
@@ -101,6 +102,6 @@ class MainActivity : Activity() {
     private fun updateTotalValue() {
         val total = globalProduct.sumOf { it.value * it.quantity }
         val currencyFormatter = NumberFormat.getCurrencyInstance(Locale("pt", "MZ"))
-        findViewById<TextView>(R.id.total).text = "TOTAL: ${currencyFormatter.format(total)}"
+        "TOTAL: ${currencyFormatter.format(total)}".also { findViewById<TextView>(R.id.total).text = it }
     }
 }
