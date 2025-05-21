@@ -6,8 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.content.ContentValues
 import com.example.listadecompras.models.Product
 
-class ProductDatabaseHelper(context: Context) :
-    SQLiteOpenHelper(context, "product_db", null, 1) {
+class ProductDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "product_db", null, 1) {
 
     override fun onCreate(db: SQLiteDatabase) {
         val createTable = """

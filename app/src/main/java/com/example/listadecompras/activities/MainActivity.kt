@@ -5,8 +5,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
@@ -30,7 +28,7 @@ class MainActivity : Activity() {
     private fun setupAddButton() {
         val addButton = findViewById<Button>(R.id.btn_adicionar)
         addButton.setOnClickListener {
-            val intent = Intent(this, CadastroActivity::class.java)
+            val intent = Intent(this, RegistrationActivity::class.java)
             startActivity(intent)
         }
     }

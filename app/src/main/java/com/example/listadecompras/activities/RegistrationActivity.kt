@@ -14,7 +14,7 @@ import com.example.listadecompras.R
 import com.example.listadecompras.utils.globalProduct
 import java.io.ByteArrayOutputStream
 
-class CadastroActivity : Activity() {
+class RegistrationActivity : Activity() {
     private val REQUEST_CODE_IMAGE = 101
     private val dbHelper by lazy { ProductDatabaseHelper(this) }
     private var productImageBitmap: Bitmap? = null
